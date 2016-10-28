@@ -1,0 +1,29 @@
+div.body{
+    margin-top: 0.5%;
+}
+div.body div{
+    background-color: lightgray;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 70%;
+    margin: 30px auto 30px auto;
+    box-shadow: 0 1px 6px 4px rgba(0, 0, 0, 0.07) inset,
+    0 0 0 3px rgb(254, 254, 254),
+    0 5px 3px 3px rgb(210, 210, 210);
+}
+button#modificationsButton{
+    width: 30%;
+    cursor: pointer;
+    background: rgb(61, 157, 179);
+    padding: 8px 5px;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    font-size: 24px;
+    border: 1px solid rgb(28, 108, 122);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+    box-shadow: 0 1px 6px 4px rgba(0, 0, 0, 0.07) inset,
+    0 0 0 3px rgb(254, 254, 254),
+    0 5px 3px 3px rgb(210, 210, 210);
+    margin-left: 15%;
+}
