@@ -4,3 +4,17 @@
     margin: 10%;
     border:1px solid black;
 }
+
+.friendslist{
+
+}
+
+
+div.body div{
+    border: 2px solid black;
+    border-radius: 10px;
+    margin: 30px auto 30px auto;
+    box-shadow: 0 1px 6px 4px rgba(0, 0, 0, 0.07) inset,
+    0 0 0 3px rgb(254, 254, 254),
+    0 5px 3px 3px rgb(210, 210, 210);
+}

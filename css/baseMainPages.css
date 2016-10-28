@@ -34,3 +34,65 @@ div.menu a{
 div.menu a:hover:nth-child(n+2){
     background: darkgrey;
 }
+
+
+body {
+    font-family: Georgia, serif;
+    background: #fff url(../images/background.jpg) no-repeat;
+    background-size: 100%;
+    font-weight: 400;
+    font-size: 15px;
+    color: #1d3c41;
+}
+
+h1, h2, h3, h4 {
+    padding: 20px 30px 10px 30px;
+    margin: 0 20px 10px 20px;
+    position: relative;
+    display: block;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    font-size: 25px;
+    line-height: 35px;
+    font-weight: 200;
+    color: rgba(26, 89, 120, 0.9);
+}
+
+
+
+.buttons button {
+    width: 30%;
+    cursor: pointer;
+    background: rgb(61, 157, 179);
+    padding: 8px 5px;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    font-size: 24px;
+    border: 1px solid rgb(28, 108, 122);
+    margin: 3% 15% 4% 2%;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+    box-shadow: 0 1px 6px 4px rgba(0, 0, 0, 0.07) inset,
+    0 0 0 3px rgb(254, 254, 254),
+    0 5px 3px 3px rgb(210, 210, 210);
+    display: inline;
+}
+
+.buttons button:hover {
+    background: rgb(74, 179, 198);
+}
+
+.roundbox{
+    text-align: left;
+    font-family: Arial, sans-serif;
+    margin-bottom: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding-left: 3%;
+    padding-right: 3%;
+    background: rgb(247, 247, 247);
+    border: 1px solid rgba(147, 184, 189, 0.8);
+    box-shadow: 0 2px 5px rgba(105, 108, 109, 0.7), 0 0 8px 5px rgba(208, 223, 226, 0.4) inset;
+    border-radius: 5px;
+}
