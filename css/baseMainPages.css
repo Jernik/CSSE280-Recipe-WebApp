@@ -9,6 +9,8 @@ h1{
 div.menu{
     background: lightgray;
     width: 98%;
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 25px;
     border: 3px solid black;
 }

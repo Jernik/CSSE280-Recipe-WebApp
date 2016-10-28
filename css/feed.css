@@ -1,0 +1,25 @@
+div.body{
+    margin-top: 0.5%;
+}
+div.body div{
+    background-color: lightgrey;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+#leftColumn{
+    float: left;
+    width: 30%;
+    margin-left: 1%;
+}
+
+#centerColumn{
+    display: inline-block;
+    width: 30%;
+    margin-left: 4%;
+}
+
+#rightColumn{
+    float: right;
+    width: 30%;
+    margin-right: 1%;
+}
