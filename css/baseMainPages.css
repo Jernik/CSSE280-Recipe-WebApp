@@ -18,6 +18,14 @@ div.menu p{
     font-size: 12pt;
     margin: 0px;
 }
-div.menu p:hover:nth-child(n+2){
+div.menu a{
+    display: inline-block;
+    padding: 10px;
+    font-size: 12pt;
+    margin: 0px;
+	color: black;
+	text-decoration: none;
+}
+div.menu a:hover:nth-child(n+2){
     background: darkgrey;
 }
