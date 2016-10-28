@@ -7,27 +7,25 @@ h1{
     text-align: center;
 }
 div.menu{
-    background: lightgray;
     width: 98%;
     margin-left: auto;
     margin-right: auto;
-    border-radius: 25px;
-    border: 3px solid black;
-    box-shadow: 0 1px 6px 4px rgba(0, 0, 0, 0.07) inset,
-    0 0 0 3px rgb(254, 254, 254),
-    0 5px 3px 3px rgb(210, 210, 210);
+    background: rgb(247, 247, 247);
+    border: 1px solid rgba(147, 184, 189, 0.8);
+    box-shadow: 0 2px 5px rgba(105, 108, 109, 0.7), 0 0 8px 5px rgba(208, 223, 226, 0.4) inset;
+    border-radius: 5px;
 }
 div.menu p{
     display: inline-block;
     padding: 10px;
     font-size: 12pt;
-    margin: 0px;
+    margin: 0;
 }
 div.menu a{
     display: inline-block;
     padding: 10px;
     font-size: 12pt;
-    margin: 0px;
+    margin: 0;
 	color: black;
 	text-decoration: none;
 }
@@ -86,11 +84,6 @@ h1, h2, h3, h4 {
 .roundbox{
     text-align: left;
     font-family: Arial, sans-serif;
-    margin-bottom: 5%;
-    margin-left: 5%;
-    margin-right: 5%;
-    padding-left: 3%;
-    padding-right: 3%;
     background: rgb(247, 247, 247);
     border: 1px solid rgba(147, 184, 189, 0.8);
     box-shadow: 0 2px 5px rgba(105, 108, 109, 0.7), 0 0 8px 5px rgba(208, 223, 226, 0.4) inset;

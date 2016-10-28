@@ -2,9 +2,6 @@ div.body{
     margin-top: 0.5%;
 }
 div.body div{
-    background-color: lightgrey;
-    border: 2px solid black;
-    border-radius: 10px;
 }
 #leftColumn{
     float: left;
