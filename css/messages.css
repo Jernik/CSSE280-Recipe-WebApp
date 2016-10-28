@@ -1,0 +1,6 @@
+.friendslist, .message{
+    display: inline-block;
+    width:10%;
+    margin: 10%;
+    border:1px solid black;
+}
