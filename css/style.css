@@ -1,6 +1,8 @@
 
 body {
     font-family: Georgia, serif;
+    background: #fff url(../images/background.jpg) no-repeat;
+    background-size: 100%;
     font-weight: 400;
     font-size: 15px;
     color: #1d3c41;
@@ -20,9 +22,10 @@ header {
     color: rgba(26, 89, 120, 0.9);
 }
 
-#login {
+#login,#register{
     text-align: left;
     font-family: Arial, sans-serif;
+    margin-bottom: 5%;
     margin-left: 5%;
     margin-right: 5%;
     padding-left: 3%;
@@ -33,12 +36,12 @@ header {
     border-radius: 5px;
 }
 
-#login a {
+#login a,#register a {
     color: rgb(95, 155, 198);
     text-decoration: underline;
 }
 
-#login h1 {
+#login h1,#register h1{
     font-size: 48px;
     color: rgb(6, 106, 117);
     padding: 2px 0 10px 0;
@@ -48,14 +51,15 @@ header {
     padding-bottom: 30px;
 }
 
-#login #username, #login #password {
+#login #username, #login #password, #register #username, #register #useremail, #register #password, #register #passwordsignup_confirm{
     width: 92%;
     margin-top: 4px;
     padding: 10px 5px 10px 10px;
     border: 1px solid rgb(178, 178, 178);
 }
 
-#login button {
+
+.buttons button {
     width: 30%;
     cursor: pointer;
     background: rgb(61, 157, 179);
@@ -73,6 +77,6 @@ header {
     display: inline;
 }
 
-#login button:hover {
+.buttons button:hover {
     background: rgb(74, 179, 198);
 }
