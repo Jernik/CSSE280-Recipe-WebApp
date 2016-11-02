@@ -18,7 +18,7 @@ a{
     color: black;
     text-decoration: none;
 }
-#editButton{
+.Button{
     width: 10%;
     cursor: pointer;
     background: rgb(61, 157, 179);
@@ -34,4 +34,7 @@ a{
     0 0 0 3px rgb(254, 254, 254),
     0 5px 3px 3px rgb(210, 210, 210);
     float: right;
+}
+.Button:hover{
+    background: rgb(74, 179, 198);
 }
