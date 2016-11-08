@@ -1,44 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Recipes Social Media</title>
-    <meta name="description" content="Recipes Social Media"/>
-    <link rel="stylesheet" type="text/css" href="css/baseMainPages.css"/>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
-</head>
-<body>
-<div class="container">
-           <h1>Login and Registration Form</h1>
 
-    <div id="login" class="animate form">
-        <form autocomplete="on">
-            <h1>Log in</h1>
-            <p>
-                <label for="username" class="uname"> Your email or username </label>
-                <input id="username" name="username" required="required" type="text"
-                       placeholder="user@example.com"/>
-            </p>
-            <p>
-                <label for="password" class="passwd"> Your password </label>
-                <input id="password" name="password" required="required" type="password"
-                       placeholder="123456"/>
-            </p>
-            <p class="keeplogin">
-                <input type="checkbox" name="keeplogin" id="keeplogin" value="keeplogin"/>
-                <label for="keeplogin">Keep me logged in</label>
-            </p>
-            <div class="buttons">
-                <button class="login button" >
+<head>
+    <meta charset="UTF-8" />
+    <title>Recipes Social Media</title>
+    <meta name="description" content="Recipes Social Media" />
+    <link rel="stylesheet" type="text/css" href="css/baseMainPages.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+
+<body>
+    <div class="container">
+        <h1>Login and Registration Form</h1>
+
+        <div id="login" class="animate form">
+            <form autocomplete="on">
+                <h1>Log in</h1>
+                <p>
+                    <label for="username" class="uname"> Your email or username </label>
+                    <input id="username" name="username" required="required" type="text" placeholder="user@example.com" />
+                </p>
+                <p>
+                    <label for="password" class="passwd"> Your password </label>
+                    <input id="password" name="password" required="required" type="password" placeholder="123456" />
+                </p>
+                <p class="keeplogin">
+                    <input type="checkbox" name="keeplogin" id="keeplogin" value="keeplogin" />
+                    <label for="keeplogin">Keep me logged in</label>
+                </p>
+                <div class="buttons">
+                    <button class="login button">
                     Login
                 </button>
-                <button class="register button">
+                    <button class="register button">
                     Register
                 </button>
-            </div>
+                </div>
 
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="js/Login.js"></script>
+
 </html>
