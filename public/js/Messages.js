@@ -95,7 +95,7 @@ function getCookie(c_name) {
 }
 
 function getUser() {
-    console.log("accessing: " + apiURL + userId);
+    console.log("accessing: " + apiURL +'profiles/' +userId);
     $.ajax({
             url: apiURL +'profiles/' +userId,
             type: 'GET',
@@ -108,6 +108,7 @@ function getUser() {
                     .css("float", "right")
                     .attr("class","roundbox");
                 profileBlock.append(link);
+                getFriends();
             },
             error: function (request, status, error) {
                 console.log(error, status, request);
@@ -119,6 +120,6 @@ function getUser() {
 
 getUser();
 
-getFriends();
+
 displayConversation();
 

@@ -80,6 +80,7 @@ function getUser() {
                     .css("float", "right")
                     .attr("class", "roundbox");
                 profileBlock.append(link);
+                getFriends();
             },
             error: function (request, status, error) {
                 console.log(error, status, request);
@@ -90,4 +91,3 @@ function getUser() {
 }
 
 getUser();
-getFriends();
