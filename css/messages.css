@@ -15,6 +15,9 @@ div.message{
     width:80%;
     margin: 1%;
     height: 700px;
+}
+.messageblock{
+    height: 95%;
     overflow: auto;
 }
 .profileImg{
@@ -40,4 +43,15 @@ div.message{
 }
 .you img{
     float: right;
+}
+form{
+    height:5%;
+}
+input.box{
+    width: 90%;
+    height: 85%;
+}
+input.button{
+    width: 9.7%;
+    height: 85%;
 }

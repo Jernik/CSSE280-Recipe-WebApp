@@ -5,6 +5,7 @@ var profileId = 0;
 // TODO To be changed later
 var apiUrl = "https://csse280-contact-back-smithtl.herokuapp.com/contacts";
 
+// Function for displaying friends list
 function displayFriends() {
     for (var i = 0; i < friendList.length; i++) {
         var friend = "<div class='roundbox'>";
@@ -14,19 +15,44 @@ function displayFriends() {
         $('.friendblock').append(friend);
     }
 }
+// Function for displaying the conversation
 function displayConversation() {
-    for (var i = 0; i < conversation.length; i=i+2) {
-        console.log(i);
-        console.log(conversation[i+1]);
-        if (conversation[i+1] === profileId){
+    for (var i = 0; i < conversation.length; i = i + 2) {
+        if (conversation[i + 1] === profileId) {
             var message = "<div class='roundbox you'>";
-            message += "<p>"+conversation[i]+"</p>"+'<img class = "profileImg" src="' + profileImg + '" width=50px height=50px />';
-        } else{
+            message += "<p>" + conversation[i] + "</p>" + '<img class = "profileImg" src="' + profileImg + '" width=50px height=50px />';
+        } else {
             var message = "<div class='roundbox others'>";
-            message += '<img class = "profileImg" src="' + profileImg + '" width=50px height=50px />'+"<p>"+conversation[i]+"</p>";
+            message += '<img class = "profileImg" src="' + profileImg + '" width=50px height=50px />' + "<p>" + conversation[i] + "</p>";
         }
         message += "</div>";
         $('.messageblock').append(message);
+    }
+    $('.message').append('<form class="form roundbox"><input class="box roundbox" type="test"><input class="button roundbox" type="submit"></form>');
+    $('.form').submit(function (e) {
+        e.preventDefault();
+        sendMessage();
+    });
+}
+function sendMessage() {
+    var message = $('.box').val();
+    console.log(message);
+    // Doesn't send message if empty'
+    if (message !== '') {
+        $.ajax({
+            url: apiURL,
+            type: 'POST',
+            dataType: 'JSON',
+            data: message,
+            success: function () {
+                location.reload();
+                /*sessionStorage.setItem("contactToUpdate", contactToUpdateString);*/
+            },
+            error: function (request, status, error) {
+                console.log(error, status, request);
+            }
+
+        });
     }
 }
 
