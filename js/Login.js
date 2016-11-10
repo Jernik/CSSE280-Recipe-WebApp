@@ -12,11 +12,12 @@ function checkLogin() {
         type: 'POST',
         dataType: 'JSON',
         data: check,
-        success: function () {
+        success: function (res) {
             var id = document.cookie;
             console.log(id);
             window.location.href = "Feed.html";
-            /*sessionStorage.setItem("contactToUpdate", contactToUpdateString);*/
+            console.log(res.user);
+            document.cookie = "login=" + res.user + "; path=/";
         },
         error: function (request, status, error) {
             alert('Username and Password do not match, please try again');
