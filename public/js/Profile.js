@@ -15,7 +15,7 @@ function placeInfo(){
     $('.body').append('<p class="text">Email: '+user.email+'</p>');
     $('.bodyy').append('<a href="URL ADDED HERE" class="text">Recipes: '+user.recipes.length+'</a>');
     // TODO If profile is logged in profile then display edit profile else show add friend
-    if (profileId === 1){
+    if (true){//profileId === userId){
         $('.body').append('<button class="Button" > Edit Profile </button>');
     } else{
         // TODO check if friend and if so show remove friend
