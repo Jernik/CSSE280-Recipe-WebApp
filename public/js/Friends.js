@@ -2,7 +2,6 @@ var profileImg = "images/profile.png";
 var email = "abcd@example.com";
 var friendList = [];
 var classList = ['.friend0', '.friend1', '.friend2', '.friend3'];
-var profileId = "5823d6837332882b20e9e6f1";
 // TODO To be changed later
 apiURL = "https://csse280-recipesocialmedia.herokuapp.com/";
 var userId = getCookie("login");
@@ -19,6 +18,8 @@ function placeInfo() {
 }
 
 function displayFriends() {
+    console.log("in display friends:");
+    console.log(user, friendList);
     var classTracker = 0; //keeping track of columns
     for (var i = 0; i < friendList.length; i++) {
         $(classList[classTracker]).append('<img id ="profileImg" src="' + profileImg + '" width=100px height=100px />');
@@ -31,6 +32,8 @@ function displayFriends() {
 }
 function getFriends() {
     friendList = user.friends;
+    console.log("friends are:");
+    console.log(friendList);
     var endList = friendList.length - 1; //last index of friend list
     for (var i = 0; i < friendList.length; i++) {
         (function (j, id) {
@@ -55,8 +58,9 @@ function getFriends() {
 }
 
 function getCookie(c_name) {
+    var c_end;
     if (document.cookie.length > 0) {
-        c_start = document.cookie.indexOf(c_name + "=");
+        var c_start = document.cookie.indexOf(c_name + "=");
         if (c_start != -1) {
             c_start = c_start + c_name.length + 1;
             c_end = document.cookie.indexOf(";", c_start);
@@ -68,7 +72,7 @@ function getCookie(c_name) {
 }
 
 function getUser() {
-    console.log("accessing: " + apiURL + userId);
+    console.log("accessing: " + apiURL +'profiles/'+ userId);
     $.ajax({
             url: apiURL + 'profiles/' + userId,
             type: 'GET',
@@ -81,6 +85,8 @@ function getUser() {
                     .css("float", "right")
                     .attr("class", "roundbox");
                 profileBlock.append(link);
+                console.log("Before getFriends:");
+                console.log(user);
                 getFriends();
             },
             error: function (request, status, error) {

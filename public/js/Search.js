@@ -1,7 +1,6 @@
 $(function(){
 	apiURL = "https://csse280-recipesocialmedia.herokuapp.com/";
-	var userId = getCookie("login");
-	var user = '';
+
 
 	var ingredients = [];
 	ingredientIndex = 0;
