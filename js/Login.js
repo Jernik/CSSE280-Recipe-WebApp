@@ -19,6 +19,7 @@ function checkLogin() {
             /*sessionStorage.setItem("contactToUpdate", contactToUpdateString);*/
         },
         error: function (request, status, error) {
+            alert('Username and Password do not match, please try again');
             console.log(error, status, request);
         }
     });
