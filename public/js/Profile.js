@@ -50,6 +50,15 @@ function getUser() {
                     .css("float", "right")
                     .attr("class","roundbox");
                 profileBlock.append(link);
+                var logout = $("<button></button>").text("Log out")
+                    .attr('href', 'Profile.html')
+                    .css("float", "right")
+                    .attr("class", "roundbox").click(function(){
+                        document.cookie = document.cookie+'=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                        window.location.href = "index.html";
+                        console.log("logging out...")
+                    });
+                profileBlock.append(logout);
                 placeInfo();
             },
             error: function (request, status, error) {
