@@ -1,4 +1,4 @@
-var apiURL = "http://localhost:3000/register";
+var apiURL = "http://127.0.0.1:3000/register";
 function registerCheck() {
     var uname = $('#username').val();
     var pass = $('#password').val();
@@ -8,11 +8,14 @@ function registerCheck() {
     $.ajax({
         url: apiURL,
         type: 'POST',
+        xhrFields: {
+            withCredentials: true
+        },
         dataType: 'JSON',
         data: check,
         success: function () {
             console.log("registered");
-            window.location.href = "index.html";
+            window.location.href = "Feed.html";
             /*sessionStorage.setItem("contactToUpdate", contactToUpdateString);*/
         },
         error: function (request, status, error) {

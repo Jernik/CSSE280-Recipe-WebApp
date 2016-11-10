@@ -1,4 +1,4 @@
-var apiURL = "http://localhost:3000/login";
+var apiURL = "http://127.0.0.1:3000/login";
 function checkLogin() {
     var uname = $('#username').val();
     var pass = $('#password').val();
