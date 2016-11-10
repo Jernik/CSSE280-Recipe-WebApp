@@ -1,4 +1,8 @@
 $(function(){
+	var apiURL = "http://127.0.0.1:3000/";
+	var userId = getCookie("login");
+	var user = '';
+
 	var ingredients = [];
 	ingredientIndex = 0;
 	$('#addIngredient').click(addIngredient);
@@ -56,7 +60,7 @@ $(function(){
 		};
 
 		$.ajax({
-        	url: domain + '/user/ingredients',
+        	url: apiURL + '/ingredients',
         	type: 'POST',
             data: {
             	ingredients: JSON.stringify(data.ingredients)
@@ -66,7 +70,7 @@ $(function(){
 
 	function getIngredientList() {
 		$.ajax({
-	    	url: domain + '/user/ingredients',
+	    	url: apiURL + '/ingredients',
 	    	type: 'GET',
 	    	success: setIngredients
 	    });	
