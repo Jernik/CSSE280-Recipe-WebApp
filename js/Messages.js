@@ -4,7 +4,9 @@ var conversation = ["How are you doing", 1, "Just hanging out", 0, "What was tha
 var profileId = "5823d6837332882b20e9e6f1";
 var conversationId = "";
 // TODO To be changed later
-var apiURL = "http://localhost:3000/";
+var apiURL = "http://127.0.0.1:3000/";
+var userId = getCookie("login");
+var user = '';
 
 // Function for displaying friends list
 function displayFriends() {
@@ -58,37 +60,64 @@ function sendMessage() {
     }
 }
 function getFriends() {
-    $.ajax({
-        url: apiURL + "profiles/" + profileId,
-        type: 'GET',
-        dataType: 'JSON',
-        success: function(data) {
-            friendList = data.friends;
-            var endList = friendList.length - 1; //last index of friend list
-            for (var i = 0; i < friendList.length; i++) {
-                (function(j, id) {
-                    $.ajax({
-                        url: apiURL + "profiles/" + id,
-                        type: 'GET',
-                        dataType: 'JSON',
-                        success: function(data) {
-                            friendList[j] = data.firstName + " " + data.lastName;
-                            if (j === endList) {
-                                displayFriends();
-                            }
-                        },
-                        error: function(request, status, error) {
-                            console.log(error, status, request);
-                        }
-                    });
-                })(i, friendList[i]);
-            }
-        },
-        error: function(request, status, error) {
-            console.log(error, status, request);
-        }
-    });
+    friendList = user.friends;
+    var endList = friendList.length - 1; //last index of friend list
+    for (var i = 0; i < friendList.length; i++) {
+        (function (j, id) {
+            $.ajax({
+                url: apiURL + "profiles/" + id,
+                type: 'GET',
+                dataType: 'JSON',
+                success: function (data) {
+                    friendList[j] = data.email;
+                    if (j === endList) {
+                        displayFriends();
+                    }
+                },
+                error: function (request, status, error) {
+                    console.log(error, status, request);
+                }
+            });
+        })(i, friendList[i]);
+    }
 }
+function getCookie(c_name) {
+    if (document.cookie.length > 0) {
+        c_start = document.cookie.indexOf(c_name + "=");
+        if (c_start != -1) {
+            c_start = c_start + c_name.length + 1;
+            c_end = document.cookie.indexOf(";", c_start);
+            if (c_end == -1) c_end = document.cookie.length;
+            return unescape(document.cookie.substring(c_start, c_end));
+        }
+    }
+    return "";
+}
+
+function getUser() {
+    console.log("accessing: " + apiURL + userId);
+    $.ajax({
+            url: apiURL +'profiles/' +userId,
+            type: 'GET',
+            success: function (res) {
+                console.log(res);
+                user = res;
+                var profileBlock = $('#profileBlock');
+                var link = $("<a></a>").text("You're logged in as " + user.firstName)
+                    .attr('href', 'Profile.html')
+                    .css("float", "right")
+                    .attr("class","roundbox");
+                profileBlock.append(link);
+            },
+            error: function (request, status, error) {
+                console.log(error, status, request);
+            }
+        }
+    );
+
+}
+
+getUser();
 
 getFriends();
 displayConversation();

@@ -3,7 +3,9 @@ var email = "abcd@example.com";
 var recipeNumber = 5;
 var profileId = 0;
 // TODO To be changed later
-var apiUrl = "https://csse280-contact-back-smithtl.herokuapp.com/contacts";
+var apiURL = "http://127.0.0.1:3000/";
+var userId = getCookie("login");
+var user = '';
 //function that places profile picture
 function placeImage(){
     $('.roundbox').append('<img id ="profileImg" src="'+profileImg+'" width=200px height=200px />');
@@ -20,6 +22,44 @@ function placeInfo(){
         $('.roundbox').append('<button class="Button" onClick=addFriend()> Add Friend </button>');
     }
 }
+
+function getCookie(c_name) {
+    if (document.cookie.length > 0) {
+        c_start = document.cookie.indexOf(c_name + "=");
+        if (c_start != -1) {
+            c_start = c_start + c_name.length + 1;
+            c_end = document.cookie.indexOf(";", c_start);
+            if (c_end == -1) c_end = document.cookie.length;
+            return unescape(document.cookie.substring(c_start, c_end));
+        }
+    }
+    return "";
+}
+
+function getUser() {
+    console.log("accessing: " + apiURL + userId);
+    $.ajax({
+            url: apiURL +'profiles/' +userId,
+            type: 'GET',
+            success: function (res) {
+                console.log(res);
+                user = res;
+                var profileBlock = $('#profileBlock');
+                var link = $("<a></a>").text("You're logged in as " + user.firstName)
+                    .attr('href', 'Profile.html')
+                    .css("float", "right")
+                    .attr("class","roundbox");
+                profileBlock.append(link);
+            },
+            error: function (request, status, error) {
+                console.log(error, status, request);
+            }
+        }
+    );
+
+}
+
+getUser();
 placeImage();
 placeInfo();
 
@@ -27,7 +67,7 @@ placeInfo();
 function addFriend() {
     // TODO get friend list and add friend to list
     $.ajax({
-        url: apiUrl+profile._id,
+        url: apiURL+profile._id,
         type: 'PUT',
         dataType: 'JSON',
         data: profile,

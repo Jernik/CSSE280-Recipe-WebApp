@@ -6,7 +6,10 @@ var description = "Yummy, fluffy eggs made in the oven";
 var instructions = ["Preheat oven to 350 degrees F (175 degress C). Grease an 8x8-inch baking dish with butter.", "Beat eggs, sour cream, milk, and salt in a bowl until blended. Stir in green onions. Pour mixture in the prepared baking dish.", "Bake in the preheated oven until set, 25 to 30 minutes. Sprinkle Cheddar cheese over eggs and continue baking until cheese is melted, 2 to 3 minutes more."];
 var profileId = 0;
 // TODO To be changed later
-var apiUrl = "https://csse280-contact-back-smithtl.herokuapp.com/contacts";
+var apiURL = "http://127.0.0.1:3000/";
+var userId = getCookie("login");
+var user = '';
+
 
 function addRecipeInfo() {
     var header = '<img id ="foodImg" src="' + foodImg + '" width=200px height=200px />';
@@ -27,5 +30,41 @@ function addRecipeInfo() {
     instructionsList += "</ol>";
     $('#instructions').append(instructionsList);
 }
+function getCookie(c_name) {
+    if (document.cookie.length > 0) {
+        c_start = document.cookie.indexOf(c_name + "=");
+        if (c_start != -1) {
+            c_start = c_start + c_name.length + 1;
+            c_end = document.cookie.indexOf(";", c_start);
+            if (c_end == -1) c_end = document.cookie.length;
+            return unescape(document.cookie.substring(c_start, c_end));
+        }
+    }
+    return "";
+}
 
+function getUser() {
+    console.log("accessing: " + apiURL + userId);
+    $.ajax({
+            url: apiURL +'profiles/' +userId,
+            type: 'GET',
+            success: function (res) {
+                console.log(res);
+                user = res;
+                var profileBlock = $('#profileBlock');
+                var link = $("<a></a>").text("You're logged in as " + user.firstName)
+                    .attr('href', 'Profile.html')
+                    .css("float", "right")
+                    .attr("class","roundbox");
+                profileBlock.append(link);
+            },
+            error: function (request, status, error) {
+                console.log(error, status, request);
+            }
+        }
+    );
+
+}
+
+getUser();
 addRecipeInfo();
