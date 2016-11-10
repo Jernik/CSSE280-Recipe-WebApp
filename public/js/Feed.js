@@ -52,12 +52,12 @@ function getUser() {
                     .attr('href', 'Profile.html')
                     .css("float", "right")
                     .attr("class", "roundbox").click(function(){
-                        document.cookie = "";
+                        document.cookie = document.cookie+'=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
                         window.location.href = "index.html";
                         console.log("logging out...")
                     });
-                profileBlock.append(link);
                 profileBlock.append(logout);
+                profileBlock.append(link);
             },
             error: function (request, status, error) {
                 console.log(error, status, request);
