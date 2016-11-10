@@ -2,15 +2,14 @@ var apiURL = "http://127.0.0.1:3000/register";
 function registerCheck() {
     var uname = $('#username').val();
     var pass = $('#password').val();
+    var name = $('#name').val();
     var check = {};
     check.username = uname;
     check.passwordHash = hashCode(pass); //to be hashed
+    check.firstName = name;
     $.ajax({
         url: apiURL,
         type: 'POST',
-        xhrFields: {
-            withCredentials: true
-        },
         dataType: 'JSON',
         data: check,
         success: function () {

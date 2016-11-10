@@ -1,12 +1,15 @@
+var apiURL = "http://127.0.0.1:3000/profiles/";
 var pictures = [];
 var descriptions = [];
 var comments = [];
 var i = 0;
 var columnTracker = 0;
 var columns = ["#leftColumn", "#centerColumn", "#rightColumn"];
+var userId = getCookie("login");
+var user = '';
 
 // Function that pulls post from backend
-function getPosts(){
+function getPosts() {
     pictures.push("images/burlyBurger.jpg");
     pictures.push("images/smokyChipotleMacAndCheese.jpg");
     pictures.push("images/spencePestoChickenPasta.jpg");
@@ -32,17 +35,36 @@ function getCookie(c_name) {
 }
 
 function getUser() {
-    alert(getCookie("login"));
+    console.log("accessing: " + apiURL + userId);
+    $.ajax({
+            url: apiURL + userId,
+            type: 'GET',
+            success: function (res) {
+                console.log(res);
+                user = res;
+                var profileBlock = $('#profileBlock');
+                var link = $("<a></a>").text("You're logged in as " + user.firstName)
+                    .attr('href', 'Profile.html')
+                    .css("float", "right")
+                    .attr("class","roundbox");
+                profileBlock.append(link);
+            },
+            error: function (request, status, error) {
+                console.log(error, status, request);
+            }
+        }
+    );
+
 }
 
 //function that places posts
-function placePosts(){
-    for (i; i<pictures.length; i++){
-        var insertDiv = '<div class="post"> <img src="'+ pictures[i]+'" alt="">';
-        insertDiv +='<p>'+descriptions[i]+'</p>';
-        insertDiv +='<p>'+comments[i]+'</p></div>';
+function placePosts() {
+    for (i; i < pictures.length; i++) {
+        var insertDiv = '<div class="post"> <img src="' + pictures[i] + '" alt="">';
+        insertDiv += '<p>' + descriptions[i] + '</p>';
+        insertDiv += '<p>' + comments[i] + '</p></div>';
         $(columns[columnTracker]).append(insertDiv);
-        if(columnTracker === 2){
+        if (columnTracker === 2) {
             columnTracker = 0;
         }
         columnTracker++;

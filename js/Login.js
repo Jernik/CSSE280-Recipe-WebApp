@@ -16,7 +16,6 @@ function checkLogin() {
             var id = document.cookie;
             console.log(id);
             window.location.href = "Feed.html";
-            console.log(res.user);
             document.cookie = "login=" + res.user + "; path=/";
         },
         error: function (request, status, error) {
