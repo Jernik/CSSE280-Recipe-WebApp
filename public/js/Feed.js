@@ -48,6 +48,12 @@ function getUser() {
                     .attr('href', 'Profile.html')
                     .css("float", "right")
                     .attr("class", "roundbox");
+                var logout = $("<button></button>").text("Log out")
+                    .attr('href', 'Profile.html')
+                    .css("float", "right")
+                    .attr("class", "roundbox").click(function(){
+                        document.cookie = "";
+                    });
                 profileBlock.append(link);
             },
             error: function (request, status, error) {
