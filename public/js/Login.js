@@ -1,4 +1,4 @@
-var apiURL = "http://127.0.0.1:3000/login";
+apiURL = "https://csse280-recipesocialmedia.herokuapp.com/login";
 function checkLogin() {
     var uname = $('#username').val();
     var pass = $('#password').val();

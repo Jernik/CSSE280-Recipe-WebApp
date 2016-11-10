@@ -1,4 +1,5 @@
-var apiURL = "http://127.0.0.1:3000/profiles/";
+apiURL = "https://csse280-recipesocialmedia.herokuapp.com/profiles/";
+
 var pictures = [];
 var descriptions = [];
 var comments = [];
@@ -46,7 +47,7 @@ function getUser() {
                 var link = $("<a></a>").text("You're logged in as " + user.firstName)
                     .attr('href', 'Profile.html')
                     .css("float", "right")
-                    .attr("class","roundbox");
+                    .attr("class", "roundbox");
                 profileBlock.append(link);
             },
             error: function (request, status, error) {

@@ -6,7 +6,7 @@ var description = "Yummy, fluffy eggs made in the oven";
 var instructions = ["Preheat oven to 350 degrees F (175 degress C). Grease an 8x8-inch baking dish with butter.", "Beat eggs, sour cream, milk, and salt in a bowl until blended. Stir in green onions. Pour mixture in the prepared baking dish.", "Bake in the preheated oven until set, 25 to 30 minutes. Sprinkle Cheddar cheese over eggs and continue baking until cheese is melted, 2 to 3 minutes more."];
 var profileId = 0;
 // TODO To be changed later
-var apiURL = "http://127.0.0.1:3000/";
+apiURL = "https://csse280-recipesocialmedia.herokuapp.com/";
 var userId = getCookie("login");
 var user = '';
 

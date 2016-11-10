@@ -4,7 +4,7 @@ var conversation = ["How are you doing", 1, "Just hanging out", 0, "What was tha
 var profileId = "5823d6837332882b20e9e6f1";
 var conversationId = "";
 // TODO To be changed later
-var apiURL = "http://127.0.0.1:3000/";
+apiURL = "https://csse280-recipesocialmedia.herokuapp.com/";
 var userId = getCookie("login");
 var user = '';
 

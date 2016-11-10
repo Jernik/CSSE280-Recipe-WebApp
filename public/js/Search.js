@@ -1,5 +1,5 @@
 $(function(){
-	var apiURL = "http://127.0.0.1:3000/";
+	apiURL = "https://csse280-recipesocialmedia.herokuapp.com/";
 	var userId = getCookie("login");
 	var user = '';
 

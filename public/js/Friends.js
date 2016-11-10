@@ -4,7 +4,7 @@ var friendList = [];
 var classList = ['.friend0', '.friend1', '.friend2', '.friend3'];
 var profileId = "5823d6837332882b20e9e6f1";
 // TODO To be changed later
-var apiURL = "http://127.0.0.1:3000/";
+apiURL = "https://csse280-recipesocialmedia.herokuapp.com/";
 var userId = getCookie("login");
 var user = '';
 

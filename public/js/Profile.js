@@ -3,7 +3,7 @@ var email = "abcd@example.com";
 var recipeNumber = 5;
 var profileId = 0;
 // TODO To be changed later
-var apiURL = "http://127.0.0.1:3000/";
+apiURL = "https://csse280-recipesocialmedia.herokuapp.com/";
 var userId = getCookie("login");
 var user = '';
 //function that places profile picture
