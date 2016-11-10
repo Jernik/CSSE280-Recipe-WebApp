@@ -55,6 +55,7 @@ function getUser() {
                         document.cookie = "";
                     });
                 profileBlock.append(link);
+                profileBlock.append(logout);
             },
             error: function (request, status, error) {
                 console.log(error, status, request);
