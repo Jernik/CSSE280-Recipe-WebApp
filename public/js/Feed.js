@@ -53,6 +53,8 @@ function getUser() {
                     .css("float", "right")
                     .attr("class", "roundbox").click(function(){
                         document.cookie = "";
+                        window.location.href = "index.html";
+                        console.log("logging out...")
                     });
                 profileBlock.append(link);
                 profileBlock.append(logout);
