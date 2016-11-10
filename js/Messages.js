@@ -1,12 +1,14 @@
 var profileImg = "images/profile.png";
-var friendList = ["John Smith", "Logan Wolverine", "jfkdsf fdsfs", "trtre dsvg", "fdsf", "fsdfsd", "fdsf", "fsdfds", "fdsfds", "fdsfds", "fdsfds", "fdsfds1", "tretefd2", "treqsd", "fdsfds", "yiur"];
+var friendList = [];
 var conversation = ["How are you doing", 1, "Just hanging out", 0, "What was that recipe you made last week?", 1, "The oven baked omellete?", 1, "fdsf", 0, "fd", 1, "fdsf", 0, "rewwsa", 1, "yregfd", 0, "wqefds", 0, "rwew", 1, "yutrdfv", 0, "sdfewrs", 0, "wqsc", 1];
-var profileId = 0;
+var profileId = "5823d6837332882b20e9e6f1";
+var conversationId = "";
 // TODO To be changed later
-var apiUrl = "https://csse280-contact-back-smithtl.herokuapp.com/contacts";
+var apiURL = "http://localhost:3000/";
 
 // Function for displaying friends list
 function displayFriends() {
+    console.log(friendList.length);
     for (var i = 0; i < friendList.length; i++) {
         var friend = "<div class='roundbox'>";
         // TODO get picture from ID
@@ -29,7 +31,7 @@ function displayConversation() {
         $('.messageblock').append(message);
     }
     $('.message').append('<form class="form roundbox"><input class="box roundbox" type="test"><input class="button roundbox" type="submit"></form>');
-    $('.form').submit(function (e) {
+    $('.form').submit(function(e) {
         e.preventDefault();
         sendMessage();
     });
@@ -44,18 +46,50 @@ function sendMessage() {
             type: 'POST',
             dataType: 'JSON',
             data: message,
-            success: function () {
+            success: function() {
                 location.reload();
                 /*sessionStorage.setItem("contactToUpdate", contactToUpdateString);*/
             },
-            error: function (request, status, error) {
+            error: function(request, status, error) {
                 console.log(error, status, request);
             }
 
         });
     }
 }
+function getFriends() {
+    $.ajax({
+        url: apiURL + "profiles/" + profileId,
+        type: 'GET',
+        dataType: 'JSON',
+        success: function(data) {
+            friendList = data.friends;
+            var endList = friendList.length - 1; //last index of friend list
+            for (var i = 0; i < friendList.length; i++) {
+                (function(j, id) {
+                    $.ajax({
+                        url: apiURL + "profiles/" + id,
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(data) {
+                            friendList[j] = data.firstName + " " + data.lastName;
+                            if (j === endList) {
+                                displayFriends();
+                            }
+                        },
+                        error: function(request, status, error) {
+                            console.log(error, status, request);
+                        }
+                    });
+                })(i, friendList[i]);
+            }
+        },
+        error: function(request, status, error) {
+            console.log(error, status, request);
+        }
+    });
+}
 
-displayFriends();
+getFriends();
 displayConversation();
 
