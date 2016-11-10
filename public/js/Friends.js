@@ -34,6 +34,7 @@ function getFriends() {
     var endList = friendList.length - 1; //last index of friend list
     for (var i = 0; i < friendList.length; i++) {
         (function (j, id) {
+            console.log("accessing " + apiURL + "profiles/" + id);
             $.ajax({
                 url: apiURL + "profiles/" + id,
                 type: 'GET',
