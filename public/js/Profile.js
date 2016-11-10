@@ -8,18 +8,18 @@ var userId = getCookie("login");
 var user = '';
 //function that places profile picture
 function placeImage(){
-    $('.roundbox').append('<img id ="profileImg" src="'+profileImg+'" width=200px height=200px />');
+    $('.body').append('<img id ="profileImg" src="'+profileImg+'" width=200px height=200px />');
 }
 // function that places profile info
 function placeInfo(){
-    $('.roundbox').append('<p class="text">Email: '+email+'</p>');
-    $('.roundbox').append('<a href="URL ADDED HERE" class="text">Recipes: '+recipeNumber+'</a>');
+    $('.body').append('<p class="text">Email: '+user.email+'</p>');
+    $('.bodyy').append('<a href="URL ADDED HERE" class="text">Recipes: '+user.recipes.length+'</a>');
     // TODO If profile is logged in profile then display edit profile else show add friend
     if (profileId === 1){
-        $('.roundbox').append('<button class="Button" > Edit Profile </button>');
+        $('.body').append('<button class="Button" > Edit Profile </button>');
     } else{
         // TODO check if friend and if so show remove friend
-        $('.roundbox').append('<button class="Button" onClick=addFriend()> Add Friend </button>');
+        $('.body').append('<button class="Button" onClick=addFriend()> Add Friend </button>');
     }
 }
 
@@ -50,6 +50,7 @@ function getUser() {
                     .css("float", "right")
                     .attr("class","roundbox");
                 profileBlock.append(link);
+                placeInfo();
             },
             error: function (request, status, error) {
                 console.log(error, status, request);
@@ -61,7 +62,6 @@ function getUser() {
 
 getUser();
 placeImage();
-placeInfo();
 
 // adding friend to your friends list
 function addFriend() {

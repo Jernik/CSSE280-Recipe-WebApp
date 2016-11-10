@@ -1,7 +1,8 @@
 var profileImg = "images/profile.png";
 var friendList = [];
-var conversation = ["How are you doing", 1, "Just hanging out", 0, "What was that recipe you made last week?", 1, "The oven baked omellete?", 1, "fdsf", 0, "fd", 1, "fdsf", 0, "rewwsa", 1, "yregfd", 0, "wqefds", 0, "rwew", 1, "yutrdfv", 0, "sdfewrs", 0, "wqsc", 1];
-var profileId = "5823d6837332882b20e9e6f1";
+var friendIds = [];
+var conversation = [];
+var messages = [];
 var conversationId = "";
 // TODO To be changed later
 apiURL = "https://csse280-recipesocialmedia.herokuapp.com/";
@@ -10,28 +11,51 @@ var user = '';
 
 // Function for displaying friends list
 function displayFriends() {
-    console.log(friendList.length);
     for (var i = 0; i < friendList.length; i++) {
-        var friend = "<div class='roundbox'>";
+        var friend = "<div class='friendbox roundbox'>";
         // TODO get picture from ID
         friend += '<img class = "profileImg" src="' + profileImg + '" width=50px height=50px />';
         friend += "<p class = 'name'>" + friendList[i] + "</p> </div>";
         $('.friendblock').append(friend);
     }
+    $('.name').click(function(){
+        var friend;
+        for (var i = 0; i < friendList.length; i++) {
+            if ($(this).text() === friendList[i]){
+                friend = friendIds[i];
+                break;
+            }
+        }
+        getConversation(friend);
+    });
 }
 // Function for displaying the conversation
 function displayConversation() {
-    for (var i = 0; i < conversation.length; i = i + 2) {
-        if (conversation[i + 1] === profileId) {
-            var message = "<div class='roundbox you'>";
-            message += "<p>" + conversation[i] + "</p>" + '<img class = "profileImg" src="' + profileImg + '" width=50px height=50px />';
-        } else {
-            var message = "<div class='roundbox others'>";
-            message += '<img class = "profileImg" src="' + profileImg + '" width=50px height=50px />' + "<p>" + conversation[i] + "</p>";
-        }
-        message += "</div>";
-        $('.messageblock').append(message);
+    console.log("hello");
+    for (var i = 0; i < conversation.length; i = i++) {
+        $.ajax({
+            url: apiURL+"messages/"+conversation[i],
+            type: 'GET',
+            dataType: 'JSON',
+            success: function(res) {
+                messages[i] = res;
+                if (messages[i].author === userId) {
+                    var message = "<div class='roundbox you'>";
+                    message += "<p>" + messages[i] + "</p>" + '<img class = "profileImg" src="' + profileImg + '" width=50px height=50px />';
+                } else {
+                    var message = "<div class='roundbox others'>";
+                    message += '<img class = "profileImg" src="' + profileImg + '" width=50px height=50px />' + "<p>" + messages[i] + "</p>";
+                }
+                message += "</div>";
+                $('.messageblock').append(message);
+            },
+            error: function(request, status, error) {
+                console.log(error, status, request);
+            }
+
+        });
     }
+    
     $('.message').append('<form class="form roundbox"><input class="box roundbox" type="test"><input class="button roundbox" type="submit"></form>');
     $('.form').submit(function(e) {
         e.preventDefault();
@@ -61,6 +85,7 @@ function sendMessage() {
 }
 function getFriends() {
     friendList = user.friends;
+    console.log(friendList);
     var endList = friendList.length - 1; //last index of friend list
     for (var i = 0; i < friendList.length; i++) {
         (function (j, id) {
@@ -69,9 +94,12 @@ function getFriends() {
                 type: 'GET',
                 dataType: 'JSON',
                 success: function (data) {
-                    friendList[j] = data.email;
+                    friendList[j] = data.firstName + " " +data.lastName;
+                    friendIds[j] = data._id;
                     if (j === endList) {
                         displayFriends();
+                        console.log(friendIds);
+                        getConversation(friendIds[3]);
                     }
                 },
                 error: function (request, status, error) {
@@ -92,6 +120,28 @@ function getCookie(c_name) {
         }
     }
     return "";
+}
+function getConversation(friendId){
+    console.log(friendId);
+    console.log(apiURL +'conversation/' +user._id.toString()+"-"+friendId.toString())
+    $.ajax({
+            url: apiURL +'conversation/' +user._id.toString()+"-"+friendId.toString(),
+            type: 'GET',
+            success: function (res) {
+                conversation = res.messages;
+                if (conversation === undefined){
+                    console.log("few");
+                } else{
+                    console.log("few");
+                    displayConversation();
+                }
+            },
+            error: function (request, status, error) {
+                console.log("few");
+                console.log(error, status, request);
+            }
+        }
+    );
 }
 
 function getUser() {
@@ -119,7 +169,4 @@ function getUser() {
 }
 
 getUser();
-
-
-displayConversation();
 
