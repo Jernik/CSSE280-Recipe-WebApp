@@ -23,7 +23,7 @@ function displayFriends() {
     var classTracker = 0; //keeping track of columns
     for (var i = 0; i < friendList.length; i++) {
         $(classList[classTracker]).append('<img id ="profileImg" src="' + profileImg + '" width=100px height=100px />');
-        $(classList[classTracker]).append('<p class="text">User: ' + friendList[i] + '</p>');
+        $(classList[classTracker]).append('<p class="text">User: ' + friendList[i].firstName + '</p>');
         classTracker++;
         if (classTracker > 3) {
             classTracker = 0;
@@ -43,7 +43,8 @@ function getFriends() {
                 type: 'GET',
                 dataType: 'JSON',
                 success: function (data) {
-                    friendList[j] = data.email;
+                    console.log(data);
+                    friendList[j] = data;
                     if (j === endList) {
                         displayFriends();
                     }
