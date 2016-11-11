@@ -1,25 +1,41 @@
-apiURL = "https://csse280-recipesocialmedia.herokuapp.com/profiles/";
+apiURL = "https://csse280-recipesocialmedia.herokuapp.com/";
 
 var pictures = [];
 var descriptions = [];
 var comments = [];
+var ids = [];
 var i = 0;
 var columnTracker = 0;
 var columns = ["#leftColumn", "#centerColumn", "#rightColumn"];
 var userId = getCookie("login");
 var user = '';
 
+
+function parseRecipes(res) {
+    res.forEach(function (e) {
+        console.log(e.imageURL);
+        pictures.push(e.imageURL);
+        descriptions.push(e.name);
+        console.log(e.name);
+        comments.push("");
+        ids.push(e._id);
+    })
+}
+
 // Function that pulls post from backend
 function getPosts() {
-    pictures.push("images/burlyBurger.jpg");
-    pictures.push("images/smokyChipotleMacAndCheese.jpg");
-    pictures.push("images/spencePestoChickenPasta.jpg");
-    descriptions.push("The maniliest burger");
-    descriptions.push("mmm mac and cheese");
-    descriptions.push("My favorite dish");
-    comments.push("threjkwe");
-    comments.push("jtlkrejtlkret");
-    comments.push("jrewjrlkewr");
+    $.ajax({
+            url: apiURL + 'recipes',
+            type: 'GET',
+            success: function (res) {
+                parseRecipes(res);
+                placePosts();
+            },
+            error: function (request, status, error) {
+                console.log(error, status, request);
+            }
+        }
+    );
 }
 
 function getCookie(c_name) {
@@ -36,9 +52,9 @@ function getCookie(c_name) {
 }
 
 function getUser() {
-    console.log("accessing: " + apiURL + userId);
+
     $.ajax({
-            url: apiURL + userId,
+            url: apiURL + 'profiles/' + userId,
             type: 'GET',
             success: function (res) {
                 console.log(res);
@@ -51,8 +67,8 @@ function getUser() {
                 var logout = $("<button></button>").text("Log out")
                     .attr('href', 'Profile.html')
                     .css("float", "right")
-                    .attr("class", "roundbox").click(function(){
-                        document.cookie = document.cookie+'=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                    .attr("class", "roundbox").click(function () {
+                        document.cookie = document.cookie + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
                         window.location.href = "index.html";
                         console.log("logging out...")
                     });
@@ -69,19 +85,32 @@ function getUser() {
 
 //function that places posts
 function placePosts() {
-    for (i; i < pictures.length; i++) {
-        var insertDiv = '<div class="post"> <img src="' + pictures[i] + '" alt="">';
+    for (var i=0; i < pictures.length; i++) {
+        var insertDiv = '<div class="post"id="' + ids[i] + '"> <img src="' + pictures[i] + '">';
         insertDiv += '<p>' + descriptions[i] + '</p>';
         insertDiv += '<p>' + comments[i] + '</p></div>';
+
         $(columns[columnTracker]).append(insertDiv);
-        if (columnTracker === 2) {
+        console.log(columns[columnTracker]);
+        columnTracker++;
+        if (columnTracker === 3) {
             columnTracker = 0;
         }
-        columnTracker++;
+
+        $('#' + ids[i]).on('click', makeClick(i));
+
+
     }
 }
+
+function makeClick(j){
+    return function () {
+        console.log(ids[j]);
+        window.location.href = "Recipes.html?id=" + ids[j];
+    };
+}
 getPosts();
-placePosts();
+
 
 getUser();
 

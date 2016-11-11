@@ -1,15 +1,53 @@
 var foodImg = "images/ovenbakedomelet.jpg";
 var author = "Tester";
-var name = "Oven Baked Omelet";
-var ingredients = ["1 teaspoon butter", "9 large eggs", " 1/2 cup sour cream", "1/2 cup milk", "1 teaspoon salt", "2 green onions, chopped", "1/4 cup shredded Cheddar cheese"];
-var description = "Yummy, fluffy eggs made in the oven";
-var instructions = ["Preheat oven to 350 degrees F (175 degress C). Grease an 8x8-inch baking dish with butter.", "Beat eggs, sour cream, milk, and salt in a bowl until blended. Stir in green onions. Pour mixture in the prepared baking dish.", "Bake in the preheated oven until set, 25 to 30 minutes. Sprinkle Cheddar cheese over eggs and continue baking until cheese is melted, 2 to 3 minutes more."];
-var profileId = 0;
+var name = "";
+var ingredients = [];
+var description = "";
+var instructions = [];
+var recipeId = 0;
 // TODO To be changed later
 apiURL = "https://csse280-recipesocialmedia.herokuapp.com/";
 var userId = getCookie("login");
 var user = '';
 
+
+recipeId = qs('id');
+
+function processRecipe(res) {
+    ingredients = res.ingredients.map(function (elem) {
+        return " " + elem.name;
+    });
+    description = res.descriptions;
+    instructions = res.steps.map(function (elem) {
+        //our backend is being weird here, so this stitches the string back together
+        var array = $.map(elem, function (value, index) {
+            return [value];
+        });
+        var temp = "";
+        for (var i = 0; i < array.length; i++) {
+            temp += array[i];
+        }
+        return temp;
+    });
+    name = res.name;
+}
+
+
+function getRecipeInfo() {
+    $.ajax({
+            url: apiURL + 'recipes/' + recipeId,
+            type: 'GET',
+            success: function (res) {
+                console.log(res);
+                processRecipe(res);
+                addRecipeInfo();
+            },
+            error: function (request, status, error) {
+                console.log(error, status, request);
+            }
+        }
+    );
+}
 
 function addRecipeInfo() {
     var header = '<img id ="foodImg" src="' + foodImg + '" width=200px height=200px />';
@@ -46,7 +84,7 @@ function getCookie(c_name) {
 function getUser() {
     console.log("accessing: " + apiURL + userId);
     $.ajax({
-            url: apiURL +'profiles/' +userId,
+            url: apiURL + 'profiles/' + userId,
             type: 'GET',
             success: function (res) {
                 console.log(res);
@@ -55,17 +93,18 @@ function getUser() {
                 var link = $("<a></a>").text("You're logged in as " + user.firstName)
                     .attr('href', 'Profile.html')
                     .css("float", "right")
-                    .attr("class","roundbox");
+                    .attr("class", "roundbox");
                 var logout = $("<button></button>").text("Log out")
                     .attr('href', 'Profile.html')
                     .css("float", "right")
-                    .attr("class", "roundbox").click(function(){
-                        document.cookie = document.cookie+'=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                    .attr("class", "roundbox").click(function () {
+                        document.cookie = document.cookie + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
                         window.location.href = "index.html";
                         console.log("logging out...")
                     });
                 profileBlock.append(logout);
                 profileBlock.append(link);
+                getRecipeInfo();
             },
             error: function (request, status, error) {
                 console.log(error, status, request);
@@ -75,5 +114,12 @@ function getUser() {
 
 }
 
+//From http://stackoverflow.com/a/7732379
+function qs(key) {
+    key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+    var match = location.search.match(new RegExp("[?&]" + key + "=([^&]+)(&|$)"));
+    return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+}
+
 getUser();
-addRecipeInfo();
+
