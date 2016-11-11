@@ -36,7 +36,7 @@ div.menu a:hover:nth-child(n+2){
 
 body {
     font-family: Georgia, serif;
-    background: #fff url(../images/background.jpg) no-repeat;
+    background: #fff url(../images/background.jpg) repeat-y;
     background-size: 100%;
     font-weight: 400;
     font-size: 15px;
